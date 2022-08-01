@@ -1,11 +1,31 @@
-import './App.css';
+import './App.sass';
+import {useState} from "react";
+import HomePage from "./components/home/HomePage";
+import BuilderPage from "./components/builder/BuilderPage";
+import MatrixPage from "./components/matrix/MatrixPage";
 
 const App = () => {
-  return (
-      <div className={"app"}>
-        app
-      </div>
-  )
+
+    const [currentPage, setCurrentPage] = useState("home")
+    const [hiddenButton, setHiddenButton] = useState(false)
+
+    return (
+        <div className={"app"}>
+            <HomePage currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      setHiddenButton={setHiddenButton}/>
+
+            <BuilderPage currentPage={currentPage}
+                         setCurrentPage={setCurrentPage}
+                         hiddenButton={hiddenButton}
+                         setHiddenButton={setHiddenButton} />
+
+            <MatrixPage currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        hiddenButton={hiddenButton}
+                        setHiddenButton={setHiddenButton} />
+        </div>
+    )
 }
 
 export default App;
