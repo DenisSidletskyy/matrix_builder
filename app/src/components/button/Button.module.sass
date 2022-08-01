@@ -1,0 +1,41 @@
+@import "src/Default"
+
+.button
+  position: absolute
+  height: 20vh
+  width: 20vh
+  border: 0
+  border-radius: 50%
+  cursor: pointer
+
+  &.toHome
+    transform: translateY(-50vh)
+    margin: 0 auto
+    background-color: lightskyblue
+    display: flex
+    align-items: flex-end
+    justify-content: center
+    line-height: 2em
+    @include trans
+
+  &.toBuilder
+    transform: translateX(50vw) translateY(-20vh)
+    background-color: lightpink
+    text-align: start
+    opacity: 1
+    @include trans
+
+  &.toMatrix
+    transform: translateX(-50vw) translateY(20vh)
+    background-color: lightgreen
+    text-align: end
+    opacity: 1
+    @include trans
+
+  &.hidden
+    opacity: 0
+
+  &:hover
+    height: 30vh
+    width: 30vh
+    font-size: 1.3em
