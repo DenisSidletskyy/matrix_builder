@@ -1,0 +1,94 @@
+@import "src/Default"
+
+.page
+  @include fullScreen
+  position: absolute
+  z-index: 3
+  display: flex
+  justify-content: center
+  align-items: center
+
+//home page
+.home
+  background-color: lightskyblue
+
+.homeEnter
+  position: absolute
+  top: $tbEnter
+
+.homeEnterActive
+  top: 0
+  @include trans
+
+.homeExit
+  right: 0
+
+.homeExitActive
+  position: absolute
+  @include trans
+
+  &.leftToRight
+    right: $lrExit
+
+  &.rightToLeft
+    right: $rlExit
+
+
+//builder page
+.builder
+  background-color: lightpink
+
+.builderEnter
+  position: absolute
+  right: $rlEnter
+
+.builderEnterActive
+  right: 0
+  @include trans
+
+.builderExit
+  top: 0
+  right: 0
+
+.builderExitActive
+  position: absolute
+  @include trans
+
+  &.topToDown
+    top: $tbExit
+
+  &.leftToRight
+    right: $lrExit
+
+  &.rightToLeft
+    right: $rlExit
+
+
+//matrix page
+.matrix
+  background-color: lightgreen
+
+.matrixEnter
+  position: absolute
+  right: $lrEnter
+
+.matrixEnterActive
+  right: 0
+  @include trans
+
+.matrixExit
+  top: 0
+  right: 0
+
+.matrixExitActive
+  position: absolute
+  @include trans
+
+  &.topToDown
+    top: $tbExit
+
+  &.leftToRight
+    right: $lrExit
+
+  &.rightToLeft
+    right: $rlExit
