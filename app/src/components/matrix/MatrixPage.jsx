@@ -8,18 +8,22 @@ const MatrixPage = ({currentPage, setCurrentPage, hiddenButton, setHiddenButton}
             visible={currentPage === "matrix"}
             className={"matrix"}
             direction={currentPage === "home" ? "topToDown" : "rightToLeft"}
-            enterHandler={() => setTimeout(() => setHiddenButton(false), 1000)}
+            handler={() => {
+                setHiddenButton(prevState => ({...prevState, home: true, builder: true}))
+                setTimeout(() => setHiddenButton(prevState => ({...prevState, home: false, builder: false})), 1000)
+            }}
         >
             <Matrix />
 
             <Button classname={"toHome"}
                     text={"home"}
-                    handler={() => setCurrentPage("home")}/>
+                    handler={() => setCurrentPage("home")}
+                    hidden={hiddenButton.home}/>
 
             <Button classname={"toBuilder"}
                     text={"builder"}
                     handler={() => setCurrentPage("builder")}
-                    hidden={hiddenButton}/>
+                    hidden={hiddenButton.builder}/>
         </Page>
     )
 }
