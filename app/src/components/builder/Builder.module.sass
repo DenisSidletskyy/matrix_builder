@@ -1,1 +1,76 @@
 @import "src/Default"
+
+.form
+  display: flex
+  flex-direction: column
+
+.title
+  margin: 0 0 20px
+  text-align: center
+
+.params, .error
+  height: $formRowHeight
+
+.params
+  justify-content: space-between
+  display: flex
+  gap: 20px
+
+  input
+    width: 35px
+    text-align: center
+    border-width: 0 0 1px
+
+    &:focus
+      outline: none
+
+.error
+  position: relative
+  display: flex
+  align-items: center
+
+.error_message
+  position: absolute
+  font-size: 0.8em
+  width: 100%
+  text-align: end
+  color: red
+
+  &.enter
+    right: 100%
+    opacity: 0
+
+  &.enterActive
+    right: 0
+    opacity: 1
+    @include transError
+
+  &.enterDone
+    right: 0
+    opacity: 1
+
+.submit
+  align-self: center
+  width: fit-content
+  line-height: 20px
+  border-radius: 20px
+  border: 0
+
+  box-shadow: 3px 3px 5px  rgba(0,0,0,0.66)
+  transition: all 50ms linear
+
+  &:hover
+    transform: scale(1.1)
+    cursor: pointer
+
+  &:active
+    transform: translateY(2px) translateX(2px)
+    box-shadow: 1px 1px 3px  rgba(0,0,0,0.66)
+
+
+
+
+
+
+
+

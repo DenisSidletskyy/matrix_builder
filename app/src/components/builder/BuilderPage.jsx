@@ -1,6 +1,6 @@
 import Button from "../button/Button";
 import Page from "../page/Page";
-import Builder from "./Builder";
+import BuilderContainer from "./BuilderContainer";
 
 const BuilderPage = ({currentPage, setCurrentPage, hiddenButton, setHiddenButton}) => {
     return (
@@ -8,18 +8,18 @@ const BuilderPage = ({currentPage, setCurrentPage, hiddenButton, setHiddenButton
             visible={currentPage === "builder"}
             className={"builder"}
             direction={currentPage === "home" ? "topToDown" : "leftToRight"}
-            enterHandler={() => setTimeout(() => setHiddenButton(false), 1000)}
+            handler={() => {
+                setHiddenButton(prevState => ({...prevState, home: true}))
+                setTimeout(() => setHiddenButton(prevState => ({...prevState, home: false})), 1000)
+            }}
         >
-            <Builder />
+            <BuilderContainer setCurrentPage={setCurrentPage}/>
 
             <Button classname={"toHome"}
                     text={"home"}
-                    handler={() => setCurrentPage("home")}/>
+                    handler={() => setCurrentPage("home")}
+                    hidden={hiddenButton.home}/>
 
-            <Button classname={"toMatrix"}
-                    text={"matrix"}
-                    handler={() => setCurrentPage("matrix")}
-                    hidden={hiddenButton}/>
         </Page>
     )
 }
