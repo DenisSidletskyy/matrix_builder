@@ -7,7 +7,7 @@ const Button = ({text, handler, classname, hidden}) => {
             className={`${s.button} ${s[classname]} ${hidden && s.hidden}`}
             onClick={handler}
         >
-            {text}
+            <div className={s.piece}>{text}</div>
         </button>
     )
 }

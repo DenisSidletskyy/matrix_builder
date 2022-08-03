@@ -2,40 +2,117 @@
 
 .button
   position: absolute
-  height: 20vh
-  width: 20vh
-  border: 0
-  border-radius: 50%
-  cursor: pointer
+  transition: all 500ms ease
 
-  &.toHome
-    transform: translateY(-50vh)
-    margin: 0 auto
-    background-color: lightskyblue
+  .piece
+    position: absolute
+    width: 10vh
+    height: 10vh
     display: flex
-    align-items: flex-end
     justify-content: center
-    line-height: 2em
-    @include trans
+    align-items: center
+    transition: all 500ms ease
 
-  &.toBuilder
-    transform: translateX(50vw) translateY(-20vh)
-    background-color: lightpink
-    text-align: start
-    opacity: 1
-    @include trans
+  &:hover
+    transition: all 300ms ease
 
-  &.toMatrix
-    transform: translateX(-50vw) translateY(20vh)
-    background-color: lightgreen
-    text-align: end
-    opacity: 1
-    @include trans
+  &:active
+    transition: all 100ms linear
+
+    .piece
+      transition: all 100ms linear
+
 
   &.hidden
     opacity: 0
+    transition: all 200ms ease
 
-  &:hover
-    height: 30vh
-    width: 30vh
-    font-size: 1.3em
+  &.toHome
+    top: -9vh
+    right: 0
+    width: 100vw
+    height: 10vh
+    background-color: lightskyblue
+    box-shadow: -2px 2px 1px 1px rgba(0,0,0,0.4)
+
+    .piece
+      top: 10vh
+      left: 5vw
+      background-color: lightskyblue
+      border-bottom-left-radius: 50%
+      border-bottom-right-radius: 50%
+      box-shadow: -2px 2px 1px 1px rgba(0,0,0,0.4)
+
+    &:hover
+      top: -3px
+
+    &:active
+      top: 0
+      box-shadow: unset
+
+      .piece
+        box-shadow: unset
+
+    &.hidden
+      top: -21vh
+
+
+
+  &.toBuilder
+    top: 0
+    right: -9vh
+    height: 100vh
+    width: 10vh
+    box-shadow: -3px 0 1px 1px rgba(0,0,0,0.4)
+    background-color: white
+
+    .piece
+      top: 5vh
+      right: 10vh
+      box-shadow: -3px 0 1px 1px rgba(0,0,0,0.4)
+      background-color: white
+      border-bottom-left-radius: 50%
+      border-top-left-radius: 50%
+
+    &:hover
+      right: -3px
+
+    &:active
+      right: 0
+      box-shadow: unset
+
+      .piece
+        box-shadow: unset
+
+    &.hidden
+      right: -21vh
+
+  &.toMatrix
+    top: 0
+    left: -9vh
+    height: 100vh
+    width: 10vh
+    box-shadow: 3px 0 1px 1px rgba(0,0,0,0.4)
+    background-color: white
+
+    .piece
+      bottom: 5vh
+      left: 10vh
+      box-shadow: 3px 0 1px 1px rgba(0,0,0,0.4)
+      background-color: white
+      border-bottom-right-radius: 50%
+      border-top-right-radius: 50%
+
+    &:hover
+      left: -3px
+
+    &:active
+      left: 0
+      box-shadow: unset
+
+      .piece
+        box-shadow: unset
+
+    &.hidden
+      left: -21vh
+
