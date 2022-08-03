@@ -7,12 +7,14 @@ import MatrixPage from "./components/matrix/MatrixPage";
 const App = () => {
 
     const [currentPage, setCurrentPage] = useState("home")
-    const [hiddenButton, setHiddenButton] = useState(false)
+    const [hiddenButton, setHiddenButton] = useState({home: false, builder: false, matrix: false})
 
     return (
         <div className={"app"}>
+
             <HomePage currentPage={currentPage}
                       setCurrentPage={setCurrentPage}
+                      hiddenButton={hiddenButton}
                       setHiddenButton={setHiddenButton}/>
 
             <BuilderPage currentPage={currentPage}

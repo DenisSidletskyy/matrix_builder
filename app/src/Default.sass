@@ -1,5 +1,8 @@
 $fontSize: 16px
 $pageSpeed: 1000ms
+$errorSpeed: 500ms
+$formRowHeight: 20px
+
 $rlEnter: -100%
 $rlExit: 100%
 $lrEnter: 100%
@@ -15,4 +18,21 @@ $btExit: -100%
 
 @mixin trans
   transition: all $pageSpeed ease
+
+@mixin transError
+  transition: all $errorSpeed ease
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+
+/* Firefox */
+input[type=number]
+  -moz-appearance: textfield
+
+button
+  border: 0
+  cursor: pointer
+
 

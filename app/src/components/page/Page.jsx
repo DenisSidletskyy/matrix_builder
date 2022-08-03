@@ -1,7 +1,7 @@
 import s from './Page.module.sass'
 import {CSSTransition} from "react-transition-group";
 
-const Page = ({children, visible, className, exitHandler, enterHandler, direction}) => {
+const Page = ({children, visible, className, handler, direction}) => {
 
     return (
         <CSSTransition
@@ -14,8 +14,7 @@ const Page = ({children, visible, className, exitHandler, enterHandler, directio
                 exitActive: s[className + "ExitActive"]
             }}
             unmountOnExit
-            onExit={exitHandler && exitHandler}
-            onEnter={enterHandler && enterHandler}
+            onEnter={handler && handler}
         >
             <div className={`${s.page} ${s[className]} ${s[direction]}`}>
                 {children}
