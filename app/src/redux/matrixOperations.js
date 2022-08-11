@@ -1,20 +1,33 @@
+export function setRandomParameters(maxColumnCount) {
+    return ({
+        columns: Math.floor(Math.random() * (maxColumnCount - 2 + 1) + 2),
+        rows: Math.floor(Math.random() * (10 - 2 + 1) + 2),
+        cells: Math.floor(Math.random() * ((10 - 2 + 1) + 2) / 2),
+    })
+}
+
 export function setInitialMatrix({columns, rows}) {
 
     return [...Array(rows)]
-        .map((_, i) => [...Array(columns)]
-            .map((_, j) => ({
-                id: `${i}-${j}`,
+        .map(() => [...Array(columns)]
+            .map(() => ({
+                id: null,
                 type: "common",
                 value: Math.floor(Math.random() * 900 + 100),
                 nearestMode: false,
                 percentMode: false,
+                percentValue: null,
             })))
+}
+
+export function setCellsId(initialMatrix) {
+    return initialMatrix.map((row, i) => row.map((cell, j) => ({...cell, id: `${i}-${j}`})))
 }
 
 export function setMatrix(initialMatrix) {
 
     let averageRow = [...Array(initialMatrix[0].length)].map(() =>
-        ({id: null, type: "average", value: 0}))
+        ({id: null, type: "average", value: 0, percentValue: null}))
 
     let numericRow = [...Array(initialMatrix[0].length + 1)].map(() =>
         ({id: null, type: "numeric", value: null}))
@@ -46,25 +59,19 @@ export function setMatrix(initialMatrix) {
     initialMatrix.unshift(numericRow)
 
     initialMatrix.forEach((row, i, matrix) => {
-        row.unshift({id: `num-col-${i}`, type: "numeric", value: i === 0 ? "№" : !matrix[i + 1] ? "avg" : i })
+        row.unshift({id: `num-col-${i}`, type: "numeric", value: i === 0 ? "#" : !matrix[i + 1] ? "avg" : i })
     })
 
     return initialMatrix
 }
 
 export function increaseValue(initialMatrix, id) {
-
-    return initialMatrix.map(row =>
-        row.map(cell =>
-                cell.id === id
-                    ? cell.value += 1
-                    : cell.value
-        ))
+    return initialMatrix.map(row => row.map(cell => cell.id === id ? {...cell, value: cell.value + 1} : cell))
 }
 
 export function deleteRow(initialMatrix, id) {
 
-    initialMatrix.splice(id - 1)
+    initialMatrix.splice(id - 1, 1)
 
     return initialMatrix
 }
@@ -87,7 +94,10 @@ export function showPercents(matrix, id) {
     matrix.forEach((row, i) => {
         if (i === id) {
             row.forEach((cell) => {
-                cell.percentMode = !cell.percentMode
+                if (cell.type === "common" || cell.type === "average") {
+                    cell.percentMode = !cell.percentMode
+                    cell.percentValue = Math.round(cell.value / row[row.length - 1].value * 100)
+                }
             })
         }
     })
@@ -95,11 +105,15 @@ export function showPercents(matrix, id) {
     return matrix
 }
 
+export function hidePercents(matrix) {
+    return matrix.map(row => row.map(cell => cell.percentMode ? {...cell, percentMode: false, percentValue: null} : cell))
+}
+
 export function showNearest(matrix, cells, currentCell) {
 
     let nearestValues = matrix
         .flat()
-        .filter(cell => cell.type === "common" && cell.value !== currentCell.value)
+        .filter(cell => cell.type === "common")
         .sort((prevCell, nextCell) =>
             Math.abs(currentCell.value - prevCell.value) - Math.abs(currentCell.value - nextCell.value))
         .slice(0, cells)
@@ -118,5 +132,5 @@ export function showNearest(matrix, cells, currentCell) {
 }
 
 export function hideNearest(matrix) {
-    return matrix.map(row => row.map(cell => cell.percentMode ? {...cell, percentMode: false} : cell))
+    return matrix.map(row => row.map(cell => cell.nearestMode ? {...cell, nearestMode: false} : cell))
 }

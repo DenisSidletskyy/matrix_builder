@@ -5,7 +5,11 @@ import {
     addRow,
     deleteRow,
     showPercents,
-    showNearest, hideNearest
+    showNearest,
+    hideNearest,
+    hidePercents,
+    setCellsId,
+    setRandomParameters
 } from "./matrixOperations";
 
 import {
@@ -16,7 +20,7 @@ import {
     ADD_ROW,
     DELETE_ROW,
     SHOW_PERCENTS,
-    SHOW_NEAREST, HIDE_NEAREST
+    SHOW_NEAREST, HIDE_NEAREST, HIDE_PERCENTS, SET_CELLS_ID, SET_RANDOM_PARAMETERS
 } from "./actions";
 
 let defaultState = {
@@ -33,9 +37,19 @@ export function matrixReducer (state = defaultState, action) {
             parameters: {...action.parameters}
         }
 
+        case SET_RANDOM_PARAMETERS: return {
+            ...state,
+            parameters: setRandomParameters(action.maxColumnCount)
+        }
+
         case SET_INITIAL_MATRIX: return {
             ...state,
             initialMatrix: setInitialMatrix({...state.parameters})
+        }
+
+        case SET_CELLS_ID: return {
+            ...state,
+            initialMatrix: setCellsId(state.initialMatrix)
         }
 
         case SET_MATRIX: return {
@@ -45,25 +59,27 @@ export function matrixReducer (state = defaultState, action) {
 
         case INCREASE_VALUE: return {
             ...state,
-            initialMatrix: increaseValue(state.initialMatrix.map(row => row.map(cell => ({...cell}))), action.id),
-            matrix: setMatrix(state.initialMatrix.map(row => row.map(cell => ({...cell}))))
+            initialMatrix: increaseValue(state.initialMatrix.map(row => row.map(cell => ({...cell}))), action.id)
         }
 
         case ADD_ROW: return {
             ...state,
-            initialMatrix: addRow(state.initialMatrix.map(row => row.map(cell => ({...cell})))),
-            matrix: setMatrix(state.initialMatrix.map(row => row.map(cell => ({...cell}))))
+            initialMatrix: addRow(state.initialMatrix.map(row => row.map(cell => ({...cell}))))
         }
 
         case DELETE_ROW: return {
             ...state,
-            initialMatrix: deleteRow(state.initialMatrix.map(row => row.map(cell => ({...cell}))), action.id),
-            matrix: setMatrix(state.initialMatrix.map(row => row.map(cell => ({...cell}))))
+            initialMatrix: deleteRow(state.initialMatrix.map(row => row.map(cell => ({...cell}))), action.id)
         }
 
         case SHOW_PERCENTS: return {
             ...state,
             matrix: showPercents(state.matrix.map(row => row.map(cell => ({...cell}))), action.id)
+        }
+
+        case HIDE_PERCENTS: return {
+            ...state,
+            matrix: hidePercents(state.matrix.map(row => row.map(cell => ({...cell}))), action.id)
         }
 
         case SHOW_NEAREST: return {
