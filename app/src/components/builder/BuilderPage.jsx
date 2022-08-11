@@ -1,6 +1,6 @@
 import Button from "../button/Button";
 import Page from "../page/Page";
-import BuilderContainer from "./BuilderContainer";
+import Builder from "./Builder";
 
 const BuilderPage = ({currentPage, setCurrentPage, hiddenButton, setHiddenButton}) => {
     return (
@@ -13,7 +13,7 @@ const BuilderPage = ({currentPage, setCurrentPage, hiddenButton, setHiddenButton
                 setTimeout(() => setHiddenButton(prevState => ({...prevState, home: false})), 1000)
             }}
         >
-            <BuilderContainer setCurrentPage={setCurrentPage}/>
+            <Builder setCurrentPage={setCurrentPage}/>
 
             <Button classname={"toHome"}
                     text={"home"}
