@@ -12,6 +12,19 @@ $tbExit: 100%
 $btEnter: 100%
 $btExit: -100%
 
+$cellHeight: 50px
+$cellWidth: 50px
+$cellFontSize: 0.9em
+
+@mixin cellStyle($height: $cellHeight, $width: $cellWidth)
+  height: $height
+  width: $width
+
+@mixin centerInner
+  display: flex
+  justify-content: center
+  align-items: center
+
 @mixin fullScreen
   width: 100%
   height: 100%
@@ -34,5 +47,6 @@ input[type=number]
 button
   border: 0
   cursor: pointer
+
 
 

@@ -34,7 +34,7 @@ const Matrix = () => {
            <CSSTransition
                in={matrixVisibility}
                appear={true}
-               timeout={300}
+               timeout={3000}
                classNames={{
                    appear: s.matrixAppear,
                    appearActive: s.matrixAppearActive,
