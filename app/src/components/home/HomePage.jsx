@@ -1,8 +1,25 @@
 import Button from "../button/Button";
 import Page from "../page/Page";
 import Home from "./Home";
+import {useDispatch} from "react-redux";
+import {setCellsIdAC, setInitialMatrixAC, setMatrixAC, setRandomParametersAC} from "../../redux/actionCreators";
 
 const HomePage = ({currentPage, setCurrentPage, setHiddenButton, hiddenButton}) => {
+
+    const screenWidth = document.body.clientWidth > 500
+        ? document.body.clientWidth
+        : document.body.clientWidth * 1.05
+
+    const dispatch = useDispatch()
+
+    const createRandomMatrix = () => {
+        dispatch(setRandomParametersAC(Math.floor(screenWidth / 85)))
+        dispatch(setInitialMatrixAC())
+        dispatch(setCellsIdAC())
+        dispatch(setMatrixAC())
+        setCurrentPage("matrix")
+    }
+
     return (
         <Page
             visible={currentPage === "home"}
@@ -22,7 +39,7 @@ const HomePage = ({currentPage, setCurrentPage, setHiddenButton, hiddenButton}) 
 
             <Button classname={"toMatrix"}
                     text={"auto"}
-                    handler={() => setCurrentPage("matrix")}
+                    handler={createRandomMatrix}
                     hidden={hiddenButton.matrix}/>
         </Page>
     )

@@ -1,1 +1,130 @@
 @import "src/Default"
+
+.matrix
+  max-height: 80vh
+  overflow-x: hidden
+  overflow-y: scroll
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 10px
+
+  &::-webkit-scrollbar
+    display: none
+
+
+.matrixAppear
+  opacity: 0
+
+.matrixAppearActive
+  opacity: 1
+  transition: opacity 2000ms ease
+
+.matrixEnter
+  opacity: 0
+
+.matrixEnterActive
+  opacity: 1
+  transition: opacity 300ms ease
+
+.matrixExit
+  opacity: 1
+
+.matrixExitActive
+  opacity: 0
+  transition: opacity 300ms ease
+
+.matrix__add
+  position: absolute
+  bottom: 20px
+  width: fit-content
+  line-height: 20px
+  border-radius: 20px
+  border: 0
+
+  box-shadow: 3px 3px 5px  rgba(0,0,0,0.66)
+  transition: all 50ms linear
+
+  &:hover
+    transform: scale(1.1)
+    cursor: pointer
+
+  &:active
+    transform: translateY(2px) translateX(2px)
+    box-shadow: 1px 1px 3px  rgba(0,0,0,0.66)
+
+.matrix__delete
+  font-size: $cellFontSize
+  font-weight: bold
+  cursor: pointer
+  background-color: transparent
+
+.matrix__row
+  display: flex
+  gap: 10px
+
+.matrix__cell
+  @include centerInner
+  width: $cellWidth
+  height: $cellHeight
+  font-size: $cellFontSize
+  perspective: 300px
+
+  .cell
+    @include centerInner
+    position: relative
+    width: 100%
+    height: 100%
+    border-radius: 5px
+    font-weight: bold
+
+    &.common
+      cursor: pointer
+      background-color: lightskyblue
+      transition: all 300ms linear, color 100ms linear
+
+      &:active
+        color: white
+
+    &.sum
+      background-color: lightpink
+
+    &.average
+      background-color: lightgreen
+
+    &.nearest
+      background-color: dodgerblue
+      color: white
+      transition: all 100ms linear
+
+    &.percent
+      background-color: transparent
+
+      .percent__scale
+        position: absolute
+        z-index: 0
+        bottom: 0
+        background-color: red
+        width: 100%
+        border-bottom-right-radius: 5px
+        border-bottom-left-radius: 5px
+
+        animation: percentScale 900ms forwards
+
+      .percent__value
+        z-index: 1
+
+@keyframes percentScale
+  0%
+    opacity: 0
+  100%
+    opacity: 0.6
+
+@media (max-width: 500px)
+  .matrix, .matrix__row
+    gap: 6px
+
+  .matrix__cell
+    width: 40px
+    height: 40px
+    font-size: 0.8em
